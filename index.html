@@ -49,8 +49,9 @@
             margin: 0 auto 30px;
             border: 4px solid #3b82f6;
             object-fit: cover;
-            object-position: center;
+            object-position: center top;
             display: block;
+            background-color: #1e293b;
         }
 
         .profile-card h1 {
@@ -436,7 +437,7 @@
         <div class="main-content">
             <!-- Left Profile Card -->
             <aside class="profile-card">
-                <img src="profile-photo.jpg" alt="Sheel Patel" class="profile-image">
+                <img src="profile-photo.jpg" alt="Sheel Patel" class="profile-image" onerror="this.src='profile-photo.jpeg'; this.onerror=null;">
                 <h1>Sheel Patel</h1>
                 <p class="subtitle">Financial/ Network / Data<br>Analyst</p>
                 
@@ -521,7 +522,7 @@
                                     <p style="color: #94a3b8; font-size: 14px; margin-top: 20px;">Hover to preview</p>
                                 </div>
                                 <div class="flip-card-back">
-                                    <img src="BMW Selling Price and Odometer Relationship.jpeg" alt="R Project Preview" class="preview-image">
+                                    <img src="BMW Selling Price and Odometer Relationship.jpg" alt="R Project Preview" class="preview-image" onerror="this.src='BMW Selling Price and Odometer Relationship.jpeg'; this.onerror=null;">
                                     <h3 class="project-title">R Analytics Projects</h3>
                                     <p style="color: #94a3b8; text-align: left; margin-bottom: 15px;">Scripts and visualizations showcasing statistical analysis, clustering, and automotive data insights.</p>
                                     <button class="view-gallery-btn" onclick="openModal('r-modal')">View All Projects</button>
@@ -564,16 +565,16 @@
             <span class="close-modal" onclick="closeModal('r-modal')">&times;</span>
             <h2 class="modal-title">R Analytics Projects</h2>
             <div class="gallery-grid">
-                <div class="gallery-item" onclick="openLightbox('BMW Selling Price and Odometer Relationship_R Script.jpeg')">
-                    <img src="BMW Selling Price and Odometer Relationship_R Script.jpeg" alt="BMW Analysis Script">
+                <div class="gallery-item" onclick="openLightbox('BMW Selling Price and Odometer Relationship_R Script.jpg')">
+                    <img src="BMW Selling Price and Odometer Relationship_R Script.jpg" alt="BMW Analysis Script" onerror="this.src='BMW Selling Price and Odometer Relationship_R Script.jpeg'; this.onerror=null;">
                     <div class="gallery-item-label">BMW Price Analysis - R Script</div>
                 </div>
-                <div class="gallery-item" onclick="openLightbox('BMW Selling Price and Odometer Relationship.jpeg')">
-                    <img src="BMW Selling Price and Odometer Relationship.jpeg" alt="BMW Analysis Visualization">
+                <div class="gallery-item" onclick="openLightbox('BMW Selling Price and Odometer Relationship.jpg')">
+                    <img src="BMW Selling Price and Odometer Relationship.jpg" alt="BMW Analysis Visualization" onerror="this.src='BMW Selling Price and Odometer Relationship.jpeg'; this.onerror=null;">
                     <div class="gallery-item-label">BMW Price & Odometer Relationship</div>
                 </div>
-                <div class="gallery-item" onclick="openLightbox('KMeansClustering_Rplot.jpeg')">
-                    <img src="KMeansClustering_Rplot.jpeg" alt="K-Means Clustering Plot">
+                <div class="gallery-item" onclick="openLightbox('KMeansClustering_Rplot.jpg')">
+                    <img src="KMeansClustering_Rplot.jpg" alt="K-Means Clustering Plot" onerror="this.src='KMeansClustering_Rplot.jpeg'; this.onerror=null;">
                     <div class="gallery-item-label">K-Means Clustering Analysis</div>
                 </div>
                 <div class="gallery-item" onclick="openLightbox('KMeansClustering_Script.png')">
@@ -584,20 +585,20 @@
                     <img src="Mapping_R.png" alt="Mapping Visualization">
                     <div class="gallery-item-label">Geographic Data Mapping</div>
                 </div>
-                <div class="gallery-item" onclick="openLightbox('Monthly Car sales Report.jpeg')">
-                    <img src="Monthly Car sales Report.jpeg" alt="Monthly Sales Report">
+                <div class="gallery-item" onclick="openLightbox('Monthly Car sales Report.jpg')">
+                    <img src="Monthly Car sales Report.jpg" alt="Monthly Sales Report" onerror="this.src='Monthly Car sales Report.jpeg'; this.onerror=null;">
                     <div class="gallery-item-label">Monthly Car Sales Report</div>
                 </div>
-                <div class="gallery-item" onclick="openLightbox('Monthly Car sales Report_RScript.jpeg')">
-                    <img src="Monthly Car sales Report_RScript.jpeg" alt="Monthly Sales Script">
+                <div class="gallery-item" onclick="openLightbox('Monthly Car sales Report_RScript.jpg')">
+                    <img src="Monthly Car sales Report_RScript.jpg" alt="Monthly Sales Script" onerror="this.src='Monthly Car sales Report_RScript.jpeg'; this.onerror=null;">
                     <div class="gallery-item-label">Monthly Sales - R Script</div>
                 </div>
-                <div class="gallery-item" onclick="openLightbox('Monthly Car Sales Volume By Brand.jpeg')">
-                    <img src="Monthly Car Sales Volume By Brand.jpeg" alt="Sales by Brand">
+                <div class="gallery-item" onclick="openLightbox('Monthly Car Sales Volume By Brand.jpg')">
+                    <img src="Monthly Car Sales Volume By Brand.jpg" alt="Sales by Brand" onerror="this.src='Monthly Car Sales Volume By Brand.jpeg'; this.onerror=null;">
                     <div class="gallery-item-label">Sales Volume by Brand</div>
                 </div>
-                <div class="gallery-item" onclick="openLightbox('Monthly Car Sales Volume By Brand_Rscript.jpeg')">
-                    <img src="Monthly Car Sales Volume By Brand_Rscript.jpeg" alt="Brand Sales Script">
+                <div class="gallery-item" onclick="openLightbox('Monthly Car Sales Volume By Brand_Rscript.jpg')">
+                    <img src="Monthly Car Sales Volume By Brand_Rscript.jpg" alt="Brand Sales Script" onerror="this.src='Monthly Car Sales Volume By Brand_Rscript.jpeg'; this.onerror=null;">
                     <div class="gallery-item-label">Brand Volume Analysis - R Script</div>
                 </div>
             </div>
