@@ -49,6 +49,8 @@
             margin: 0 auto 30px;
             border: 4px solid #3b82f6;
             object-fit: cover;
+            object-position: center;
+            display: block;
         }
 
         .profile-card h1 {
@@ -171,30 +173,71 @@
             gap: 30px;
         }
 
-        .project-card {
-            background: rgba(30, 41, 59, 0.6);
+        /* Flip Card Styles */
+        .flip-card {
+            background-color: transparent;
+            perspective: 1000px;
+            height: 450px;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
             border-radius: 15px;
             padding: 30px;
-            transition: all 0.3s;
+            background: rgba(30, 41, 59, 0.6);
             border: 1px solid rgba(59, 130, 246, 0.1);
         }
 
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
-            border-color: rgba(59, 130, 246, 0.3);
+        .flip-card-front {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
-        .project-card h3 {
+        .flip-card-back {
+            transform: rotateY(180deg);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .preview-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .project-title {
             font-size: 22px;
             margin-bottom: 15px;
             color: #3b82f6;
+            text-align: left;
         }
 
-        .project-card p {
+        .project-description {
             color: #94a3b8;
             line-height: 1.6;
             margin-bottom: 20px;
+            text-align: left;
         }
 
         .project-tags {
@@ -212,14 +255,153 @@
             font-size: 13px;
         }
 
+        .nda-badge {
+            background: rgba(251, 191, 36, 0.2);
+            color: #fbbf24;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .view-gallery-btn {
+            background: #3b82f6;
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin-top: auto;
+        }
+
+        .view-gallery-btn:hover {
+            background: #2563eb;
+            transform: scale(1.05);
+        }
+
         .project-link {
             color: #3b82f6;
             text-decoration: none;
             font-weight: 600;
+            display: inline-block;
+            margin-top: auto;
         }
 
         .project-link:hover {
             text-decoration: underline;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            position: relative;
+            background: #1e293b;
+            margin: 40px auto;
+            padding: 40px;
+            max-width: 1200px;
+            border-radius: 15px;
+        }
+
+        .close-modal {
+            color: #fff;
+            float: right;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .close-modal:hover {
+            color: #3b82f6;
+        }
+
+        .modal-title {
+            font-size: 28px;
+            margin-bottom: 30px;
+            color: #fff;
+            clear: both;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            cursor: pointer;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-item-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        /* Lightbox for full image view */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: #fff;
+            font-size: 50px;
+            font-weight: bold;
+            cursor: pointer;
         }
 
         /* Responsive Design */
@@ -241,6 +423,11 @@
             .projects-grid {
                 grid-template-columns: 1fr;
             }
+
+            .flip-card {
+                height: auto;
+                min-height: 450px;
+            }
         }
     </style>
 </head>
@@ -254,12 +441,12 @@
                 <p class="subtitle">Financial/ Network / Data<br>Analyst</p>
                 
                 <div class="social-links">
-                    <a href="https://linkedin.com/in/yourprofile" target="https://www.linkedin.com/in/sheelp311/" aria-label="LinkedIn">
+                    <a href="https://www.linkedin.com/in/sheelp311/" target="_blank" aria-label="LinkedIn">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                         </svg>
                     </a>
-                    <a href="https://instagram.com/yourprofile" target="https://www.instagram.com/sheel.patel311/" aria-label="Instagram">
+                    <a href="https://www.instagram.com/sheel.patel311/" target="_blank" aria-label="Instagram">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                         </svg>
@@ -290,43 +477,214 @@
                     <h2>Featured Projects</h2>
                     <div class="projects-grid">
                         
-                        <article class="project-card">
-                            <h3>Network Performance Dashboard</h3>
-                            <p>Real-time monitoring dashboard for network infrastructure with automated alerting and performance metrics visualization.</p>
-                            <div class="project-tags">
-                                <span class="tag">Python</span>
-                                <span class="tag">PowerBI</span>
-                                <span class="tag">SQL</span>
+                        <!-- THK Project -->
+                        <div class="flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <span class="nda-badge">NDA Protected</span>
+                                    <h3 class="project-title">THK Company - BI Dashboard</h3>
+                                    <p class="project-description">Data-driven dashboard for a Japan-based ball bearing manufacturer focusing on scrap mitigation and production optimization using Python, Power BI, and Excel.</p>
+                                    <div class="project-tags">
+                                        <span class="tag">Python</span>
+                                        <span class="tag">Power BI</span>
+                                        <span class="tag">Excel</span>
+                                        <span class="tag">DAX</span>
+                                    </div>
+                                    <p style="color: #94a3b8; font-size: 14px; margin-top: 20px;">Hover to see project highlights</p>
+                                </div>
+                                <div class="flip-card-back">
+                                    <h3 class="project-title">Project Highlights</h3>
+                                    <div style="text-align: left; color: #cbd5e1; line-height: 1.8; overflow-y: auto;">
+                                        <p style="margin-bottom: 15px;">✓ Analyzed 3 years of scrap data and 9 months of production data</p>
+                                        <p style="margin-bottom: 15px;">✓ Built three interactive dashboards with KPIs and DAX</p>
+                                        <p style="margin-bottom: 15px;">✓ ELT process using Google Colab</p>
+                                        <p style="margin-bottom: 15px;">✓ Deep dive into scrap trends and cost impact</p>
+                                        <p style="margin-bottom: 15px;">✓ Team collaboration with advanced analytics</p>
+                                    </div>
+                                    <a href="https://www.linkedin.com/posts/sheelp311_dataanalytics-powerbi-python-activity-7260716950766166016-Z5h8" target="_blank" class="project-link">Read Full Story on LinkedIn →</a>
+                                </div>
                             </div>
-                            <a href="#" class="project-link">View Project →</a>
-                        </article>
+                        </div>
 
-                        <article class="project-card">
-                            <h3>Financial Analysis Tool</h3>
-                            <p>Automated financial reporting system that streamlines data collection and generates insightful business reports.</p>
-                            <div class="project-tags">
-                                <span class="tag">Excel</span>
-                                <span class="tag">VBA</span>
-                                <span class="tag">Tableau</span>
+                        <!-- R Projects -->
+                        <div class="flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <h3 class="project-title">R Analytics Projects</h3>
+                                    <p class="project-description">Collection of statistical analysis and data visualization projects using R, featuring exploratory data analysis, predictive modeling, and custom visualizations with BMW sales data and clustering algorithms.</p>
+                                    <div class="project-tags">
+                                        <span class="tag">R</span>
+                                        <span class="tag">ggplot2</span>
+                                        <span class="tag">K-Means</span>
+                                        <span class="tag">Statistics</span>
+                                    </div>
+                                    <p style="color: #94a3b8; font-size: 14px; margin-top: 20px;">Hover to preview</p>
+                                </div>
+                                <div class="flip-card-back">
+                                    <img src="BMW Selling Price and Odometer Relationship.jpeg" alt="R Project Preview" class="preview-image">
+                                    <h3 class="project-title">R Analytics Projects</h3>
+                                    <p style="color: #94a3b8; text-align: left; margin-bottom: 15px;">Scripts and visualizations showcasing statistical analysis, clustering, and automotive data insights.</p>
+                                    <button class="view-gallery-btn" onclick="openModal('r-modal')">View All Projects</button>
+                                </div>
                             </div>
-                            <a href="#" class="project-link">View Project →</a>
-                        </article>
+                        </div>
 
-                        <article class="project-card">
-                            <h3>Data Pipeline Automation</h3>
-                            <p>ETL pipeline that automates data extraction, transformation, and loading for business intelligence purposes.</p>
-                            <div class="project-tags">
-                                <span class="tag">Python</span>
-                                <span class="tag">Pandas</span>
-                                <span class="tag">API</span>
+                        <!-- Power BI Projects -->
+                        <div class="flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <h3 class="project-title">Power BI Dashboards</h3>
+                                    <p class="project-description">Interactive business intelligence dashboards featuring sales analytics, performance metrics, trend analysis, and key business insights across multiple dimensions including geography, product lines, and customer segments.</p>
+                                    <div class="project-tags">
+                                        <span class="tag">Power BI</span>
+                                        <span class="tag">DAX</span>
+                                        <span class="tag">SQL</span>
+                                        <span class="tag">ETL</span>
+                                    </div>
+                                    <p style="color: #94a3b8; font-size: 14px; margin-top: 20px;">Hover to preview</p>
+                                </div>
+                                <div class="flip-card-back">
+                                    <img src="powerbi-project-preview.png" alt="Power BI Preview" class="preview-image">
+                                    <h3 class="project-title">Power BI Dashboards</h3>
+                                    <p style="color: #94a3b8; text-align: left; margin-bottom: 15px;">Comprehensive dashboards with interactive visualizations, KPIs, and business intelligence insights.</p>
+                                    <button class="view-gallery-btn" onclick="openModal('powerbi-modal')">View All Dashboards</button>
+                                </div>
                             </div>
-                            <a href="#" class="project-link">View Project →</a>
-                        </article>
+                        </div>
 
                     </div>
                 </section>
             </main>
         </div>
     </div>
+
+    <!-- R Projects Modal -->
+    <div id="r-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('r-modal')">&times;</span>
+            <h2 class="modal-title">R Analytics Projects</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item" onclick="openLightbox('BMW Selling Price and Odometer Relationship_R Script.jpeg')">
+                    <img src="BMW Selling Price and Odometer Relationship_R Script.jpeg" alt="BMW Analysis Script">
+                    <div class="gallery-item-label">BMW Price Analysis - R Script</div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox('BMW Selling Price and Odometer Relationship.jpeg')">
+                    <img src="BMW Selling Price and Odometer Relationship.jpeg" alt="BMW Analysis Visualization">
+                    <div class="gallery-item-label">BMW Price & Odometer Relationship</div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox('KMeansClustering_Rplot.jpeg')">
+                    <img src="KMeansClustering_Rplot.jpeg" alt="K-Means Clustering Plot">
+                    <div class="gallery-item-label">K-Means Clustering Analysis</div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox('KMeansClustering_Script.png')">
+                    <img src="KMeansClustering_Script.png" alt="K-Means Script">
+                    <div class="gallery-item-label">K-Means Clustering - R Script</div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox('Mapping_R.png')">
+                    <img src="Mapping_R.png" alt="Mapping Visualization">
+                    <div class="gallery-item-label">Geographic Data Mapping</div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox('Monthly Car sales Report.jpeg')">
+                    <img src="Monthly Car sales Report.jpeg" alt="Monthly Sales Report">
+                    <div class="gallery-item-label">Monthly Car Sales Report</div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox('Monthly Car sales Report_RScript.jpeg')">
+                    <img src="Monthly Car sales Report_RScript.jpeg" alt="Monthly Sales Script">
+                    <div class="gallery-item-label">Monthly Sales - R Script</div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox('Monthly Car Sales Volume By Brand.jpeg')">
+                    <img src="Monthly Car Sales Volume By Brand.jpeg" alt="Sales by Brand">
+                    <div class="gallery-item-label">Sales Volume by Brand</div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox('Monthly Car Sales Volume By Brand_Rscript.jpeg')">
+                    <img src="Monthly Car Sales Volume By Brand_Rscript.jpeg" alt="Brand Sales Script">
+                    <div class="gallery-item-label">Brand Volume Analysis - R Script</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Power BI Modal -->
+    <div id="powerbi-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('powerbi-modal')">&times;</span>
+            <h2 class="modal-title">Power BI Dashboards</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item" onclick="openLightbox('Chain Reaction Bike - Performance Report.jpeg')">
+                    <img src="Chain Reaction Bike - Performance Report.jpeg" alt="Bike Performance Dashboard">
+                    <div class="gallery-item-label">Chain Reaction Bike - Performance Report</div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox('Country Performance Dashboard (Graph View).jpeg')">
+                    <img src="Country Performance Dashboard (Graph View).jpeg" alt="Country Performance Graph">
+                    <div class="gallery-item-label">Country Performance Dashboard (Graph View)</div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox('Country Performance Dashboard (Table View).jpeg')">
+                    <img src="Country Performance Dashboard (Table View).jpeg" alt="Country Performance Table">
+                    <div class="gallery-item-label">Country Performance Dashboard (Table View)</div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox('Decomposition Tree - POwerBI.jpeg')">
+                    <img src="Decomposition Tree - POwerBI.jpeg" alt="Decomposition Tree Analysis">
+                    <div class="gallery-item-label">Decomposition Tree Analysis</div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox('Guest Booking Trend Report.jpeg')">
+                    <img src="Guest Booking Trend Report.jpeg" alt="Booking Trends">
+                    <div class="gallery-item-label">Guest Booking Trend Report</div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox('Key Influencers of Sales Dashboard.jpeg')">
+                    <img src="Key Influencers of Sales Dashboard.jpeg" alt="Sales Key Influencers">
+                    <div class="gallery-item-label">Key Influencers of Sales Dashboard</div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox('Quartely Sales Report - Dashboard.jpeg')">
+                    <img src="Quartely Sales Report - Dashboard.jpeg" alt="Quarterly Sales">
+                    <div class="gallery-item-label">Quarterly Sales Report - Dashboard</div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox('Sales By Country Dashboard.jpeg')">
+                    <img src="Sales By Country Dashboard.jpeg" alt="Sales by Country">
+                    <div class="gallery-item-label">Sales By Country Dashboard</div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox('Wealth Segment Breakdown.jpeg')">
+                    <img src="Wealth Segment Breakdown.jpeg" alt="Wealth Segments">
+                    <div class="gallery-item-label">Wealth Segment Breakdown</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox for full image view -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" src="" alt="Full view">
+    </div>
+
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function openLightbox(imageSrc) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = imageSrc;
+            lightbox.style.display = 'flex';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+    </script>
 </body>
 </html>
